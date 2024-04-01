@@ -40,11 +40,11 @@ class Server:
         index = index_range(page, page_size)
         return self.dataset()[index[0]:index[1]]
 
-    def get_hyper(page: int = 1, page_size: int = 10) -> dict:
+    def get_hyper(self, page: int = 1, page_size: int = 10) -> dict:
         """ method that takes the same arguments (and defaults)
         as get_page and returns a dictionary"""
-        data = server.get_data(page, page_size)
-        dataset = server.dataset()
+        data = self.get_data(page, page_size)
+        dataset = self.__dataset
         len_of_dataset = len(dataset) if dataset else None
         pages = math.ceil(len_of_dataset / page_size) if dataset else None
         page_size = len(data) if data else None
