@@ -10,6 +10,7 @@ Server = __import__('1-simple_pagination').Server
 
 server = Server()
 
+
 class Server:
     """Server class to paginate a database of popular baby names.
     """
