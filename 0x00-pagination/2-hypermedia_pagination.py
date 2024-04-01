@@ -55,4 +55,4 @@ class Server:
         next_ = page + 1 if page < pages else None
 
         return {'page_size': page_size, 'page': page, 'data': data,
-                'next_page': next_, 'prev_page': prev, 'pages': pages}
+                'next_page': next_, 'prev_page': prev, 'total_pages': pages}
