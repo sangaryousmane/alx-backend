@@ -5,40 +5,38 @@ from base_caching import BaseCaching
 
 
 class LIFOCache(BaseCaching):
-    """ Implement a FIFO cache algorithm
-    """
+    """ LIFO caching """
 
     def __init__(self):
-        """ initializer """
+        """ Constructor """
         super().__init__()
-        self.stack = []
+        self.queue = []
 
     def put(self, key, item):
-        """Assign to the dictionary the item value to the key"""
+        """ Puts item in cache """
         if key is None or item is None:
             return
+
         self.cache_data[key] = item
-        
-        if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
-            if self.stack:
-                newest = self.stack.pop()
-                del self.cache_data[newest]
-                print("DISCARD: {}".format(newest))
-        if key not in self.stack:
-            self.stack.append(key)
+
+        if len(self.cache_data) > BaseCaching.MAX_ITEMS:
+            if self.queue:
+                last = self.queue.pop()
+                del self.cache_data[last]
+                print("DISCARD: {}".format(last))
+
+        if key not in self.queue:
+            self.queue.append(key)
         else:
-            if self.stack[len(stack) - 1] != key:
-                self.stack.remove(key)
-                self.stack.append(key)
+            self.mv_last_list(key)
 
     def get(self, key):
-        """ return the value in the dictionary link to the
-        given key"""
-        if (key is None) or (key not in self.cache_data):
-            return None
-        return self.cache_data[key]
+        """ Gets item from cache """
+        return self.cache_data.get(key, None)
 
-    def print_cache(self):
-        """ Print the cache data"""
-        for key, value in self.cache_data.items():
-            print("{}: {}".format(key, value))
+    def mv_last_list(self, item):
+        """ Moves element to last idx of list """
+        length = len(self.queue)
+        if self.queue[length - 1] != item:
+            self.queue.remove(item)
+            self.queue.append(item)
