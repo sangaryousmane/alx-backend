@@ -11,7 +11,7 @@ class LRUCache(BaseCaching):
 
     def __init__(self):
         super().__init__()
-        self.cache_data = OrderedDict(max_length=BaseCaching.MAX_ITEMS)
+        self.cache_data = OrderedDict()
 
     def put(self, key, item):
         """Assign to the dictionary the item value to the key"""
