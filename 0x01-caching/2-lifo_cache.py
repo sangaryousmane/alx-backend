@@ -20,7 +20,6 @@ class LIFOCache(BaseCaching):
             newest = self.pop()
             del self.cache_data[newest]
             print("DISCARD: {}".format(newest))
-        
         self.newest.append(key)
         self.cache_data[key] = item
 
