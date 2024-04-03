@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """ inherits from BaseCaching and implement a simple
 caching system """
 from base import BaseCaching
