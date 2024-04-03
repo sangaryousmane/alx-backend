@@ -37,8 +37,3 @@ class LRUCache(BaseCaching):
         value = self.cache_data[key]
         self.cache_data.move_to_end(key)
         return value
-
-    def print_cache(self):
-        """ Print the cache data"""
-        for key, value in self.cache_data.items():
-            print("{}: {}".format(key, value))
