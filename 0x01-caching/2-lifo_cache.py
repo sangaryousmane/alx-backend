@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-""" Implement a FIFO cache algorithm
+""" Implement a LIFO cache algorithm
 """
 from base_caching import BaseCaching
 
