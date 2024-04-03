@@ -10,7 +10,7 @@ class LIFOCache(BaseCaching):
     def __init__(self):
         """ Constructor """
         super().__init__()
-        self.queue = []
+        self.stack = []
 
     def put(self, key, item):
         """ Puts item in cache """
@@ -20,23 +20,19 @@ class LIFOCache(BaseCaching):
         self.cache_data[key] = item
 
         if len(self.cache_data) > BaseCaching.MAX_ITEMS:
-            if self.queue:
-                last = self.queue.pop()
-                del self.cache_data[last]
-                print("DISCARD: {}".format(last))
+            if self.stack:
+                newest = self.stack.pop()
+                del self.cache_data[newest]
+                print("DISCARD: {}".format(newest))
 
-        if key not in self.queue:
-            self.queue.append(key)
+        if key not in self.stack:
+            self.stack.append(key)
         else:
-            self.mv_last_list(key)
+            length = len(self.queue)
+            if self.queue[length - 1] != item:
+                self.queue.remove(item)
+                self.queue.append(item)
 
     def get(self, key):
         """ Gets item from cache """
         return self.cache_data.get(key, None)
-
-    def mv_last_list(self, item):
-        """ Moves element to last idx of list """
-        length = len(self.queue)
-        if self.queue[length - 1] != item:
-            self.queue.remove(item)
-            self.queue.append(item)
