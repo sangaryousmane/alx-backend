@@ -20,7 +20,7 @@ class LIFOCache(BaseCaching):
             newest = self.stack.pop()
             del self.cache_data[newest]
             print("DISCARD: {}".format(newest))
-        self.newest.append(key)
+        self.stack.append(key)
         self.cache_data[key] = item
 
     def get(self, key):
@@ -29,3 +29,8 @@ class LIFOCache(BaseCaching):
         if (key is None) or (key not in self.cache_data):
             return None
         return self.cache_data[key]
+
+    def print_cache(self):
+        """ Print the cache data"""
+        for key, value in self.cache_data.items():
+            print("{}: {}".format(key, value))
