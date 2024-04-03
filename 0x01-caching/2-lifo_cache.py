@@ -9,6 +9,7 @@ class LIFOCache(BaseCaching):
     """
 
     def __init__(self):
+        """ initializer """
         super().__init__()
         self.stack = []
 
@@ -16,12 +17,19 @@ class LIFOCache(BaseCaching):
         """Assign to the dictionary the item value to the key"""
         if key is None or item is None:
             return
-        if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
-            newest = self.stack.pop()
-            del self.cache_data[newest]
-            print("DISCARD: {}".format(newest))
-        self.stack.append(key)
         self.cache_data[key] = item
+        
+        if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
+            if self.stack:
+                newest = self.stack.pop()
+                del self.cache_data[newest]
+                print("DISCARD: {}".format(newest))
+        if key not in self.stack:
+            self.stack.append(key)
+        else:
+            if self.stack[len(stack) - 1] != key:
+                self.stack.remove(key)
+                self.stack.append(key)
 
     def get(self, key):
         """ return the value in the dictionary link to the
