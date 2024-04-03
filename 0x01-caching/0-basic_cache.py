@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """ inherits from BaseCaching and implement a simple
 caching system """
-from base import BaseCaching
+from base_caching import BaseCaching
 
 
 class BasicCache(BaseCaching):
