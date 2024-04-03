@@ -8,9 +8,6 @@ class BasicCache(BaseCaching):
     """ inherits from BaseCaching and implement a simple
     caching system """
 
-    def __init(self):
-        pass
-
     def put(self, key, item):
         """ Assign to the dictionary the item with
         the given key """
