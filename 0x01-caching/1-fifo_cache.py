@@ -14,18 +14,17 @@ class FIFOCache(BaseCaching):
         self.queue = deque(maxlen=BaseCaching.MAX_ITEMS)
 
     def put(self, key, item):
-        """ assign to the dictionary the item value to the key
-        """
+        """Assign to the dictionary the item value to the key"""
         if key is None or item is None:
             return
+        
+        if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
+            oldest_key = self.queue.popleft()
+            del self.cache_data[oldest_key]
+            print("DISCARD: {}".format(oldest_key))
+        
         self.queue.append(key)
         self.cache_data[key] = item
-
-        if len(self.cache_data) > BaseCaching.MAX_ITEMS:
-            num1 = self.queue[0]
-            self.queue.popleft()
-            del self.cache_data[num1]
-            print("DISCARD: {}".format(num1))
 
     def get(self, key):
         """ return the value in the dictionary link to the
