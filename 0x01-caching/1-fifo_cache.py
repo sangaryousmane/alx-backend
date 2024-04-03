@@ -24,7 +24,7 @@ class FIFOCache(BaseCaching):
         if len(self.cache_data) > BaseCaching.MAX_ITEMS:
             num1 = self.queue.popleft()
             del self.cache_data[num1]
-            print("DISCARDS: {}".format(num1))
+            print("DISCARD: {}".format(num1))
 
     def get(self, key):
         """ return the value in the dictionary link to the
