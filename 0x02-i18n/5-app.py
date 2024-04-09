@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-'''
-    Use Babel to get user locale.
-'''
+"""
+Use Babel to get user localization and return it
+"""
 
 from flask_babel import Babel
 from flask import Flask, render_template, request, g
@@ -12,9 +12,9 @@ babel = Babel(app)
 
 
 class Config(object):
-    '''
-        Babel configuration.
-    '''
+    """
+    Babel configuration class
+    """
     LANGUAGES = ['en', 'fr']
     BABEL_DEFAULT_LOCALE = 'en'
     BABEL_DEFAULT_TIMEZONE = 'UTC'
@@ -31,9 +31,10 @@ users = {
 
 
 def get_user() -> Union[dict, None]:
-    '''
-        Get user from session as per variable.
-    '''
+    """
+    Get the user from session and handle the exceptions
+    accordingly.
+    """
     try:
         login_as = request.args.get('login_as', None)
         user = users[int(login_as)]
@@ -43,26 +44,26 @@ def get_user() -> Union[dict, None]:
 
 @app.before_request
 def before_request():
-    '''
-        Operations before request.
-    '''
+    """
+    Handle the operations before request.
+    """
     user = get_user()
     g.user = user
 
 
 @app.route('/', methods=['GET'], strict_slashes=False)
-def helloWorld() -> str:
-    '''
-        Render template for Babel usage.
-    '''
+def hello_babel():
+    """
+    Func to render the template for translation.
+    """
     return render_template('5-index.html')
 
 
 @babel.localeselector
-def get_locale() -> str:
-    '''
-        Get user locale to serve matching translation.
-    '''
+def get_locale():
+    """
+    Return the user locale to serve matching translation.
+    """
     locale = request.args.get('locale')
     if locale in app.config['LANGUAGES']:
         return locale
