@@ -7,8 +7,12 @@ from flask import Flask, render_template
 app = Flask(__name__)
 
 
-@app.route("/")
+@app.route("/", methods=['GET'], strict_slashes=False)
 def hello():
     """ Simple route
     """
     return render_template("index.html", title="Welcome to Holberton")
+
+
+if __name__ == '__main__':
+    app.run()
