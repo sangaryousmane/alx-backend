@@ -19,7 +19,7 @@ class Config:
 app.config.from_object(Config)
 
 
-@app.route("/", methods=['GET'], strict_slashes = False)
+@app.route("/", methods=['GET'], strict_slashes=False)
 def hello_babel():
     """ Greetings with Babel configured
     """
